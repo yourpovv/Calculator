@@ -1,6 +1,5 @@
 <div align="center">
 
-
 # Calculator
 
 **a Calculator with 8 operations**
