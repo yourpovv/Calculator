@@ -25,7 +25,7 @@ if not errorlevel 1 (
     )
     windres -DMINGW_BUILD app.rc -O coff -o build\app.res
     if errorlevel 1 exit /b %errorlevel%
-    g++ -std=c++17 -Wall -Wextra -Iinclude src\calculator.cpp src\banner.cpp src\terminal.cpp src\main.cpp build\app.res -o build\calculator.exe
+    g++ -static -std=c++17 -Wall -Wextra -Iinclude src\calculator.cpp src\banner.cpp src\terminal.cpp src\main.cpp build\app.res -o build\calculator.exe
     exit /b %errorlevel%
 )
 
