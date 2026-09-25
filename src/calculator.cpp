@@ -73,9 +73,18 @@ Result power(double baseNumber, double exponent) {
     return {value, true, ""};
 }
 
+std::string imaginaryRoot(double magnitude) {
+    const std::string numericText = formatDecimal(magnitude);
+    return std::fabs(magnitude - 1.0) < 1e-12 ? "i" : numericText + "i";
+}
+
 Result squareRoot(double number) {
     if (number < 0.0) {
-        return {0.0, false, "you can't find the square root of a negative number"};
+        const double magnitude = std::sqrt(std::fabs(number));
+        if (!std::isfinite(magnitude)) {
+            return {0.0, false, "could not calculate square root"};
+        }
+        return {magnitude, true, "", imaginaryRoot(magnitude)};
     }
     return finiteOrError(std::sqrt(number), "could not calculate square root");
 }

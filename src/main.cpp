@@ -32,7 +32,11 @@ void showResult(const calculator::Result& calculation) {
         return;
     }
 
-    std::cout << OK << "Result: " << calculator::format(calculation.resultValue) << RESET << "\n";
+    const std::string resultText = calculation.formattedResult.empty()
+        ? calculator::format(calculation.resultValue)
+        : calculation.formattedResult;
+
+    std::cout << OK << "Result: " << resultText << RESET << "\n";
 }
 
 bool readTwoNumbers(const std::string& firstPrompt,

@@ -8,6 +8,7 @@ struct Result {
     double resultValue = 0.0;
     bool success = false;
     std::string errorMessage;
+    std::string formattedResult;
 };
 
 Result add(double firstNumber, double secondNumber);
