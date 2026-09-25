@@ -14,9 +14,9 @@ bool isZero(double number) {
 
 Result finiteOrError(double value, const char* errorMessage) {
     if (!std::isfinite(value)) {
-        return {0.0, false, errorMessage};
+        return {0.0, false, errorMessage, ""};
     }
-    return {value, true, ""};
+    return {value, true, "", ""};
 }
 
 std::string formatDecimal(double number) {
@@ -52,14 +52,14 @@ Result multiply(double firstNumber, double secondNumber) {
 
 Result divide(double firstNumber, double secondNumber) {
     if (isZero(secondNumber)) {
-        return {0.0, false, "you can't divide by zero"};
+        return {0.0, false, "you can't divide by zero", ""};
     }
     return finiteOrError(firstNumber / secondNumber, "result is out of range");
 }
 
 Result remainder(double firstNumber, double secondNumber) {
     if (isZero(secondNumber)) {
-        return {0.0, false, "you can't find remainder with zero"};
+        return {0.0, false, "you can't find remainder with zero", ""};
     }
     return finiteOrError(std::fmod(firstNumber, secondNumber), "could not calculate remainder");
 }
@@ -68,9 +68,9 @@ Result power(double baseNumber, double exponent) {
     errno = 0;
     const double value = std::pow(baseNumber, exponent);
     if (errno != 0 || !std::isfinite(value)) {
-        return {0.0, false, "could not calculate power"};
+        return {0.0, false, "could not calculate power", ""};
     }
-    return {value, true, ""};
+    return {value, true, "", ""};
 }
 
 std::string imaginaryRoot(double magnitude) {
@@ -82,7 +82,7 @@ Result squareRoot(double number) {
     if (number < 0.0) {
         const double magnitude = std::sqrt(std::fabs(number));
         if (!std::isfinite(magnitude)) {
-            return {0.0, false, "could not calculate square root"};
+            return {0.0, false, "could not calculate square root", ""};
         }
         return {magnitude, true, "", imaginaryRoot(magnitude)};
     }
